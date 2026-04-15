@@ -603,6 +603,8 @@ If mode is set, respond accordingly like a South African teacher.
 
             } catch (e) {
                 console.log('Error:', e.message);
+                alert("Error: " + e.message);
+
             } finally {
                 setLoading(false);
             }
