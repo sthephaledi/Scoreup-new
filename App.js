@@ -595,7 +595,7 @@ If mode is set, respond accordingly like a South African teacher.
                     ...prev,
                     {
                         role: 'ai',
-                        text: reply,
+                        text: data.reply || "No reply",
                         topic: userMsg,
                         showQuiz: true,
                         youtubeQuery: userMsg + ' grade ' + grade + ' CAPS South Africa'
