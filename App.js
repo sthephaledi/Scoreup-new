@@ -588,7 +588,8 @@ If mode is set, respond accordingly like a South African teacher.
 
                 console.log("AI RESPONSE:", data);
 
-                setAiQ(data.reply);
+                console.log("REPLY:", data.reply);
+                setAiQ(data.reply || "No reply");
 
                 setChat((prev) => [
                     ...prev,
