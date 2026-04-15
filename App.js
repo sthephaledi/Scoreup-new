@@ -63,6 +63,8 @@ const signUp = async (email, password, name, role, grade) => {
         const data = await res.json();
         setAuthError(data.error ? data.error.message : 'Success: ' + data.localId);
         if (data.error) return { error: data.error.message };
+        localStorage.setItem('userToken', data.idToken);
+        localStorage.setItem('userUid', data.localId);
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
         return { error: 'Catch: ' + e.message + ' ' + e.toString() };
@@ -117,7 +119,13 @@ export default function App() {
                 setNotifyMinute(data.notifyMinute || 0);
                 setReferralCode(data.referralCode || '');
                 setReferralEarnings(data.referralEarnings || 0);
-                setScreen('dashboard');
+                const token = localStorage.getItem('userToken');
+                if (token) {
+                    setScreen('dashboard');
+                } else {
+                    setScreen('signup');
+                }
+
             }
         };
         loadData();
