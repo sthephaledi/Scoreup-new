@@ -53,6 +53,7 @@ https://www.education.gov.za/Curriculum/NationalSeniorCertificate(NSC)Examinatio
 
         const data = await response.json();
         console.log("DEEPSEEK RESPONSE:", JSON.stringify(data));
+        if (data.error) console.log("DEEPSEEK ERROR DETAIL:", data.error.message, data.error.code);
 
         const reply =
             data?.choices?.[0]?.message?.content || "No response from AI";
