@@ -37,7 +37,7 @@ const VALID_CODES = [
 ];
 const saveStudentData = async (data) => {
     try {
-        await SecureStore.setItemAsync('studentData', JSON.stringify(data));
+        localStorage.setItemAsync('studentData', JSON.stringify(data));
     } catch (e) {
         console.log('Save error', e);
     }
@@ -45,7 +45,7 @@ const saveStudentData = async (data) => {
 
 const loadStudentData = async () => {
     try {
-        const data = await SecureStore.getItemAsync('studentData');
+        const data = localStorage.getItemAsync('studentData');
         return data ? JSON.parse(data) : null;
     } catch (e) {
         return null;
