@@ -572,7 +572,7 @@ Instruction:
 If mode is FREE_CHAT, guide student into Solve / Explain / Test / Fix / Summarise.
 If mode is set, respond accordingly like a South African teacher.
 `;
-                console.log("SENDING:", msg, grade);
+                console.log("SENDING:", userMsg, grade);
                 const res = await fetch("https://scoreup-topaz.vercel.app/api/ai", {
                     method: "POST",
                     headers: {
