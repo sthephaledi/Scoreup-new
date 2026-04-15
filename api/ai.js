@@ -52,6 +52,7 @@ https://www.education.gov.za/Curriculum/NationalSeniorCertificate(NSC)Examinatio
         });
 
         const data = await response.json();
+        console.log("DEEPSEEK RESPONSE:", JSON.stringify(data));
 
         const reply =
             data?.choices?.[0]?.message?.content || "No response from AI";
@@ -62,9 +63,9 @@ https://www.education.gov.za/Curriculum/NationalSeniorCertificate(NSC)Examinatio
 
     } catch (err) {
         console.error("AI ERROR:", err);
-
         return res.status(500).json({
-            error: err.message || "AI request failed"
+            error: err.message,
+            full: JSON.stringify(err)
         });
     }
 }
