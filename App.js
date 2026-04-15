@@ -579,7 +579,7 @@ If mode is set, respond accordingly like a South African teacher.
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        msg,
+                        msg: userMsg,
                         grade
                     })
                 });
