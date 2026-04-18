@@ -1,5 +1,4 @@
 import * as Notifications from 'expo-notifications';
-import * as SecureStore from 'expo-secure-store';
 import { useEffect, useState } from 'react';
 import { Linking, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -531,7 +530,7 @@ Rules:
                     <Text style={{ fontSize: 12, fontWeight: '800', color: '#3A86FF', marginBottom: 3 }}>⭐ Subscribe — R200/month</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>First month R160 with promo code </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={async () => { await SecureStore.deleteItemAsync('studentData'); setName(''); setGrade(''); setSelected([]); setMarks({}); setEmail(''); setPassword(''); setToken(''); setUid(''); setScreen('splash'); }} style={{ backgroundColor: '#FFF0F0', borderRadius: 14, padding: 14, marginTop: 8, alignItems: 'center' }}>
+                <TouchableOpacity onPress={async () => { localStorage.clear(); document.cookie = "userToken=;max-age=0;path=/"; setName(''); setGrade(''); setSelected([]); setMarks({}); setEmail(''); setPassword(''); setToken(''); setUid(''); setScreen('splash'); }} style={{ backgroundColor: '#FFF0F0', borderRadius: 14, padding: 14, marginTop: 8, alignItems: 'center' }}>
                     <Text style={{ fontSize: 13, fontWeight: '800', color: '#EF4444' }}>Sign Out</Text>
                 </TouchableOpacity>
             </ScrollView>
