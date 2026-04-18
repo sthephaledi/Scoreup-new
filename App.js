@@ -1,6 +1,20 @@
 import * as Notifications from 'expo-notifications';
+import { initializeApp } from 'firebase/app';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Linking, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDv6Q6A806aaj3EjqzTzesSwV8J8DDC9Xo",
+    authDomain: "scoreup-d7609.firebaseapp.com",
+    projectId: "scoreup-d7609",
+    storageBucket: "scoreup-d7609.appspot.com",
+    messagingSenderId: "849052040027",
+    appId: "1:849052040027:web:c9ca3ea4a0938d0455387e"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 /**
 * ScoreUp Learning Engine
@@ -29,11 +43,6 @@ function detectMode(text) {
 
 const FIREBASE_API_KEY = 'AIzaSyDv6Q6A806aaj3EjqzTzesSwV8J8DDC9Xo';
 const FIREBASE_PROJECT_ID = 'scoreup-d7609';
-const VALID_CODES = [
-    'SCU-TEST-0001',
-    'SCU-TEST-0002',
-    'SCU-TEST-0003',
-];
 const saveStudentData = async (data) => {
     try {
         localStorage.setItem('studentData', JSON.stringify(data));
@@ -1237,8 +1246,10 @@ If mode is set, respond accordingly like a South African teacher.
                     <Text style={{ fontSize: 10, fontWeight: '800', color: '#9BA3BE', letterSpacing: 1, marginBottom: 6 }}>ACCESS CODE</Text>
                     <TextInput value={accessCode} onChangeText={setAccessCode} placeholder="e.g. SCU-ELAM20-7K92" autoCapitalize="characters" style={{ backgroundColor: '#fff', borderRadius: 12, padding: 14, fontSize: 15, borderWidth: 1.5, borderColor: 'rgba(20,30,80,0.09)', marginBottom: 14, textAlign: 'center', letterSpacing: 2, fontWeight: '700' }} />
                     {authError ? <Text style={{ color: '#EF4444', fontSize: 12, fontWeight: '600', marginBottom: 10, textAlign: 'center' }}>{authError}</Text> : null}
-                    <TouchableOpacity onPress={() => {
-                        if (VALID_CODES.includes(accessCode.trim().toUpperCase())) {
+                    <TouchableOpacity onPress={async () => {
+                        const codeRef = doc(db, 'validCodes', accessCode.trim().toUpperCase());
+                        const codeSnap = await getDoc(codeRef);
+                        if (codeSnap.exists() && codeSnap.data().active === true) {
                             setIsSubscribed(true);
                             setAuthError('');
                             saveStudentData({ name, grade, selected, marks, role, uid, streak, referralCode, isSubscribed: true });
@@ -1256,7 +1267,7 @@ If mode is set, respond accordingly like a South African teacher.
                         <Text style={{ fontSize: 13, color: '#9BA3BE', fontWeight: '600' }}>Skip for now</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </View >
         );
     }
 
