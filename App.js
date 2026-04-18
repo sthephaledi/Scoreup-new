@@ -64,6 +64,9 @@ const signUp = async (email, password, name, role, grade) => {
         if (data.error) return { error: data.error.message };
         document.cookie = "userToken=" + data.idToken + ";max-age=31536000;path=/";
         localStorage.setItem('userUid', data.localId);
+        const signupDate = new Date().toISOString();
+        localStorage.setItem('signupDate', signupDate);
+
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
         return { error: 'Catch: ' + e.message + ' ' + e.toString() };
@@ -120,6 +123,15 @@ export default function App() {
                 setNotifyMinute(data.notifyMinute || 0);
                 setReferralCode(data.referralCode || '');
                 setReferralEarnings(data.referralEarnings || 0);
+                const signupDate = localStorage.getItem('signupDate');
+                if (signupDate) {
+                    const daysPassed = (new Date() - new Date(signupDate)) / (1000 * 60 * 60 * 24);
+                    if (daysPassed > 3 && !isSubscribed) {
+                        setScreen('activate');
+                        return;
+                    }
+                }
+
             }
             const token = document.cookie.split('; ').find(r => r.startsWith('userToken='))?.split('=')[1]
 
