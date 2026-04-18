@@ -181,7 +181,7 @@ export default function App() {
     const [sessionSeconds, setSessionSeconds] = useState(0);
     const [sessionActive, setSessionActive] = useState(false);
     const [showSessionModal, setShowSessionModal] = useState(false);
-    const [sessionTarget, setSessionTarget] = useState(5400);
+    const [sessionTarget, setSessionTarget] = useState(1800);
     const [streak, setStreak] = useState(0);
     const [referralCode, setReferralCode] = useState('');
     const [referralEarnings, setReferralEarnings] = useState(0);
