@@ -81,7 +81,7 @@ const signIn = async (email, password) => {
         const data = await res.json();
         if (data.error) return { error: data.error.message };
         localStorage.setItem('userToken', data.idToken);
-localStorage.setItem('userUid', data.localId);
+        localStorage.setItem('userUid', data.localId);
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
         return { error: e.message };
