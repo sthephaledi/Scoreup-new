@@ -121,14 +121,14 @@ export default function App() {
                 setNotifyMinute(data.notifyMinute || 0);
                 setReferralCode(data.referralCode || '');
                 setReferralEarnings(data.referralEarnings || 0);
-                const token = localStorage.getItem('userToken');
-                if (token) {
-                    setScreen('dashboard');
-                } else {
-                    setScreen('signup');
-                }
-
             }
+            const token = localStorage.getItem('userToken');
+            if (token) {
+                setScreen('dashboard');
+            } else {
+                setScreen('signup');
+            }
+
         };
         loadData();
     }, []);
