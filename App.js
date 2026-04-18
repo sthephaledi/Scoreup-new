@@ -63,7 +63,7 @@ const signUp = async (email, password, name, role, grade) => {
         const data = await res.json();
         setAuthError(data.error ? data.error.message : 'Success: ' + data.localId);
         if (data.error) return { error: data.error.message };
-        localStorage.setItem('userToken', data.idToken);
+        document.cookie = "userToken=" + data.idToken + ";max-age=31536000;path=/";
         localStorage.setItem('userUid', data.localId);
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
@@ -80,7 +80,7 @@ const signIn = async (email, password) => {
         });
         const data = await res.json();
         if (data.error) return { error: data.error.message };
-        localStorage.setItem('userToken', data.idToken);
+        document.cookie = "userToken=" + data.idToken + ";max-age=31536000;path=/";
         localStorage.setItem('userUid', data.localId);
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
@@ -122,7 +122,8 @@ export default function App() {
                 setReferralCode(data.referralCode || '');
                 setReferralEarnings(data.referralEarnings || 0);
             }
-            const token = localStorage.getItem('userToken');
+            const token = document.cookie.split('; ').find(r => r.startsWith('userToken='))?.split('=')[1]
+
             if (token) {
                 setScreen('dashboard');
             } else {
