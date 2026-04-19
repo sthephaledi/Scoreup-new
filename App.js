@@ -1283,16 +1283,18 @@ If mode is set, respond accordingly like a South African teacher.
                 <TouchableOpacity onPress={() => Linking.openURL('https://score-up-genius.lovable.app')} style={{ backgroundColor: '#3A86FF', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
                     <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Subscribe — R200/month →</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity onPress={() => setScreen('activate')} style={{ backgroundColor: '#FFF4E8', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
-                    <Text style={{ fontSize: 15, fontWeight: '800', color: '#F7962B' }}>⚡ Already paid? Enter access code</Text>
-                    <TouchableOpacity onPress={() => {
-                        localStorage.setItem('trialStart', new Date().toISOString());
-                        localStorage.setItem('trialActive', 'true');
-                        setScreen('dashboard');
-                    }} style={{ backgroundColor: '#4CAF50', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
-                        <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>🎁 Start 3 Day Free Trial</Text>
-                    </TouchableOpacity>
                 </TouchableOpacity>
+                <Text style={{ fontSize: 15, fontWeight: '800', color: '#F7962B' }}>⚡ Already paid? Enter access code</Text>
+                <TouchableOpacity onPress={() => {
+                    localStorage.setItem('trialStart', new Date().toISOString());
+                    localStorage.setItem('trialActive', 'true');
+                    setScreen('dashboard');
+                }} style={{ backgroundColor: '#4CAF50', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
+                    <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>🎁 Start 3 Day Free Trial</Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity onPress={() => setScreen('dashboard')} style={{ marginTop: 8 }}>
                     <Text style={{ fontSize: 13, color: '#9BA3BE', fontWeight: '600' }}>← Back to Dashboard</Text>
                 </TouchableOpacity>
