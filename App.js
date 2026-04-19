@@ -1285,8 +1285,8 @@ If mode is set, respond accordingly like a South African teacher.
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setScreen('activate')} style={{ backgroundColor: '#FFF4E8', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
+                    <Text style={{ fontSize: 15, fontWeight: '800', color: '#F7962B' }}>⚡ Already paid? Enter access code</Text>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 15, fontWeight: '800', color: '#F7962B' }}>⚡ Already paid? Enter access code</Text>
                 <TouchableOpacity onPress={() => {
                     localStorage.setItem('trialStart', new Date().toISOString());
                     localStorage.setItem('trialActive', 'true');
