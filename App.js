@@ -211,6 +211,9 @@ export default function App() {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [notifyHour, setNotifyHour] = useState(18);
     const [notifyMinute, setNotifyMinute] = useState(0);
+    const signupDate = localStorage.getItem('signupDate');
+    const trialExpired = signupDate ? (new Date() - new Date(signupDate)) / (1000 * 60 * 60 * 24) > 3 : false;
+
 
     const handleSendAI = async () => {
         // 1. figure out what student wants
@@ -513,18 +516,18 @@ Rules:
                         </View>
                     );
                 })}
-                <TouchableOpacity onPress={() => { if (!isSubscribed) { setScreen('locked'); } else { setScreen('tutor'); } }} style={{ backgroundColor: '#E8F1FF', borderRadius: 14, padding: 14, marginTop: 8 }}>
+                <TouchableOpacity onPress={() => { if (!isSubscribed && trialExpired) { setScreen('locked'); } else { setScreen('tutor'); } }} style={{ backgroundColor: '#E8F1FF', borderRadius: 14, padding: 14, marginTop: 8 }}>
                     <Text style={{ fontSize: 12, fontWeight: '800', color: '#3A86FF', marginBottom: 3 }}>🧠 AI Tutor</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>Ask me anything about your CAPS subjects!</Text>
-                </TouchableOpacity><TouchableOpacity onPress={() => { if (!isSubscribed) { setScreen('locked'); } else { setScreen('planner'); } }} style={{ backgroundColor: '#F3EEFF', borderRadius: 14, padding: 14, marginTop: 8 }}>
+                </TouchableOpacity><TouchableOpacity onPress={() => { if (!isSubscribed && trialExpired) { setScreen('locked'); } else { setScreen('planner'); } }} style={{ backgroundColor: '#F3EEFF', borderRadius: 14, padding: 14, marginTop: 8 }}>
                     <Text style={{ fontSize: 12, fontWeight: '800', color: '#8B5CF6', marginBottom: 3 }}>📅 Study Planner</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>Your weekly study schedule</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { if (!isSubscribed) { setScreen('locked'); } else { setQuizSubject(''); setScreen('quiz'); } }} style={{ backgroundColor: '#FFF4E8', borderRadius: 14, padding: 14, marginTop: 8 }}>
+                <TouchableOpacity onPress={() => { if (!isSubscribed && trialExpired) { setScreen('locked'); } else { setQuizSubject(''); setScreen('quiz'); } }} style={{ backgroundColor: '#FFF4E8', borderRadius: 14, padding: 14, marginTop: 8 }}>
                     <Text style={{ fontSize: 12, fontWeight: '800', color: '#F7962B', marginBottom: 3 }}>🧪 Quiz Me</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>Test yourself with spaced repetition</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { if (!isSubscribed) { setScreen('locked'); } else { setScreen('parent'); } }} style={{ backgroundColor: '#E3F9F3', borderRadius: 14, padding: 14, marginTop: 8 }}>
+                <TouchableOpacity onPress={() => { if (!isSubscribed && trialExpired) { setScreen('locked'); } else { setScreen('parent'); } }} style={{ backgroundColor: '#E3F9F3', borderRadius: 14, padding: 14, marginTop: 8 }}>
                     <Text style={{ fontSize: 12, fontWeight: '800', color: '#16C79A', marginBottom: 3 }}>👨‍👩‍👧 Parent View</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>See your child's progress</Text>
                 </TouchableOpacity>
