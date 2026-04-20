@@ -79,6 +79,7 @@ const signUp = async (email, password, name, role, grade) => {
 
         return { success: true, token: data.idToken, uid: data.localId };
     } catch (e) {
+        console.log('CATCH ERROR:', e.message, e.toString());
         return { error: 'Catch: ' + e.message + ' ' + e.toString() };
     }
 };
