@@ -70,7 +70,7 @@ const signUp = async (email, password, name, role, grade) => {
         });
         const data = await res.json();
         console.log('SIGNUP RESULT:', JSON.stringify(data));
-        setAuthError(data.error ? data.error.message : 'Success: ' + data.localId);
+        console.log('signup data:', data.error ? data.error.message : 'Success: ' + data.localId);
         if (data.error) return { error: data.error.message };
         document.cookie = "userToken=" + data.idToken + ";max-age=31536000;path=/";
         localStorage.setItem('userUid', data.localId);
