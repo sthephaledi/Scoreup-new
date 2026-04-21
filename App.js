@@ -63,7 +63,7 @@ const loadStudentData = async () => {
 
 const signUp = async (email, password, name, role, grade) => {
     try {
-        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDv6Q6A80aaj3EjqzTzesSwV8J8DDC9X0', {
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDv6Q6A806aaj3EjqzTzesSwV8J8DDC9Xo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, returnSecureToken: true })
@@ -86,7 +86,7 @@ const signUp = async (email, password, name, role, grade) => {
 
 const signIn = async (email, password) => {
     try {
-        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDv6Q6A80aaj3EjqzTzesSwV8J8DDC9X0', {
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDv6Q6A806aaj3EjqzTzesSwV8J8DDC9Xo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, returnSecureToken: true })
