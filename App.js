@@ -306,7 +306,7 @@ Rules:
                 <TextInput value={password} onChangeText={setPassword} placeholder="At least 6 characters" secureTextEntry style={{ backgroundColor: '#fff', borderRadius: 12, padding: 14, fontSize: 15, borderWidth: 1.5, borderColor: 'rgba(20,30,80,0.09)', marginBottom: 14 }} />
 
                 {authError ? <Text style={{ color: '#EF4444', fontSize: 12, fontWeight: '600', marginBottom: 10, textAlign: 'center' }}>{authError}</Text> : null}
-                <TouchableOpacity onPress={() => setScreen('grade')} style={{ backgroundColor: '#3A86FF', borderRadius: 14, padding: 16, alignItems: 'center' }}>
+                <TouchableOpacity onPress={async () => { const result = await signUp(email, password, name, role, grade); if (!result.error) setScreen('grade'); }} style={{ backgroundColor: '#3A86FF', borderRadius: 14, padding: 16, alignItems: 'center' }}>
                     <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Create Account →</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setScreen('splash')} style={{ alignItems: 'center', marginTop: 16 }}>
