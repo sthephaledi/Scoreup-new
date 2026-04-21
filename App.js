@@ -69,7 +69,6 @@ const signUp = async (email, password, name, role, grade) => {
             body: JSON.stringify({ email, password, returnSecureToken: true })
         });
         const data = await res.json();
-alert(JSON.stringify(data));
         console.log('SIGNUP RESULT:', JSON.stringify(data));
         console.log('signup data:', data.error ? data.error.message : 'Success: ' + data.localId);
         if (data.error) return { error: data.error.message };
