@@ -147,7 +147,7 @@ const lastDate = data.lastStreakDate;
 
 if (lastDate && lastDate !== today && lastDate !== yesterday) {
 setStreak(0);
-await setDoc(ref, { streak: 0 }, { merge: true });
+setDoc(ref, { streak: 0 }, { merge: true });
 } else {
 setStreak(data.streak || 0);
 }
@@ -188,7 +188,7 @@ setStreak(data.streak || 0);
                     setSessionActive(false);
                     const newStreak = streak + 1;
 setStreak(newStreak);
-await saveStreakToFirebase(newStreak);
+saveStreakToFirebase(newStreak);
                     alert('🎉 Study session complete! Streak updated!');
                     return 0;
                 }
