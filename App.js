@@ -16,6 +16,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
+
 /**
 * ScoreUp Learning Engine
 * Controls student behavior, AI flow, and learning structure
@@ -49,6 +50,18 @@ const saveStudentData = async (data) => {
     } catch (e) {
         console.log('Save error', e);
     }
+};
+
+const saveStreakToFirebase = async (newStreak) => {
+try {
+const ref = doc(db, 'users', name); // 'name' is already in your state
+await setDoc(ref, {
+streak: newStreak,
+lastStreakDate: new Date().toDateString()
+}, { merge: true });
+} catch (e) {
+console.log('Streak save failed:', e);
+}
 };
 
 const loadStudentData = async () => {
@@ -128,7 +141,17 @@ export default function App() {
                 setSelected(data.selected || []);
                 setMarks(data.marks || {});
                 setRole(data.role || 'student');
-                setStreak(data.streak || 0);
+                const today = new Date().toDateString();
+const yesterday = new Date(Date.now() - 86400000).toDateString();
+const lastDate = data.lastStreakDate;
+
+if (lastDate && lastDate !== today && lastDate !== yesterday) {
+setStreak(0);
+await setDoc(ref, { streak: 0 }, { merge: true });
+} else {
+setStreak(data.streak || 0);
+}
+                setSessionSubject(data.lastSubject || '');
                 setIsSubscribed(data.isSubscribed || false);
                 setNotifyHour(data.notifyHour || 18);
                 setNotifyMinute(data.notifyMinute || 0);
@@ -163,7 +186,9 @@ export default function App() {
                 if (s + 1 >= sessionTarget) {
                     clearInterval(id);
                     setSessionActive(false);
-                    setStreak(prev => prev + 1);
+                    const newStreak = streak + 1;
+setStreak(newStreak);
+await saveStreakToFirebase(newStreak);
                     alert('🎉 Study session complete! Streak updated!');
                     return 0;
                 }
@@ -581,6 +606,14 @@ Rules:
             setMessage('');
 
             setChat((prev) => [...prev, { role: 'user', text: userMsg }]);
+// Detect and remember subject
+const subjects = ['geography', 'maths', 'science', 'history', 'english', 'physics', 'biology', 'accounting'];
+const found = subjects.find(s => userMsg.toLowerCase().includes(s));
+if (found && found !== sessionSubject) {
+setSessionSubject(found);
+const ref = doc(db, 'users', name); // you already have db from line 17
+await setDoc(ref, { lastSubject: found }, { merge: true });
+}
 
             setLoading(true);
 
@@ -608,7 +641,9 @@ If mode is set, respond accordingly like a South African teacher.
                     },
                     body: JSON.stringify({
                         msg: userMsg,
-                        grade
+                        grade,
+                        subject: sessionSubject,
+history: chat.slice(-10)
                     })
                 });
 
