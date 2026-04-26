@@ -53,15 +53,15 @@ const saveStudentData = async (data) => {
 };
 
 const saveStreakToFirebase = async (newStreak) => {
-try {
-const ref = doc(db, 'users', name); // 'name' is already in your state
-await setDoc(ref, {
-streak: newStreak,
-lastStreakDate: new Date().toDateString()
-}, { merge: true });
-} catch (e) {
-console.log('Streak save failed:', e);
-}
+    try {
+        const ref = doc(db, 'users', name); // 'name' is already in your state
+        await setDoc(ref, {
+            streak: newStreak,
+            lastStreakDate: new Date().toDateString()
+        }, { merge: true });
+    } catch (e) {
+        console.log('Streak save failed:', e);
+    }
 };
 
 const loadStudentData = async () => {
@@ -142,15 +142,15 @@ export default function App() {
                 setMarks(data.marks || {});
                 setRole(data.role || 'student');
                 const today = new Date().toDateString();
-const yesterday = new Date(Date.now() - 86400000).toDateString();
-const lastDate = data.lastStreakDate;
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                const lastDate = data.lastStreakDate;
 
-if (lastDate && lastDate !== today && lastDate !== yesterday) {
-setStreak(0);
-setDoc(ref, { streak: 0 }, { merge: true });
-} else {
-setStreak(data.streak || 0);
-}
+                if (lastDate && lastDate !== today && lastDate !== yesterday) {
+                    setStreak(0);
+                    setDoc(ref, { streak: 0 }, { merge: true });
+                } else {
+                    setStreak(data.streak || 0);
+                }
                 setSessionSubject(data.lastSubject || '');
                 setIsSubscribed(data.isSubscribed || false);
                 setNotifyHour(data.notifyHour || 18);
@@ -187,8 +187,8 @@ setStreak(data.streak || 0);
                     clearInterval(id);
                     setSessionActive(false);
                     const newStreak = streak + 1;
-setStreak(newStreak);
-saveStreakToFirebase(newStreak);
+                    setStreak(newStreak);
+                    saveStreakToFirebase(newStreak);
                     alert('🎉 Study session complete! Streak updated!');
                     return 0;
                 }
@@ -240,7 +240,7 @@ saveStreakToFirebase(newStreak);
     const [notifyMinute, setNotifyMinute] = useState(0);
     const signupDate = localStorage.getItem('signupDate');
     const trialExpired = signupDate ? (new Date() - new Date(signupDate)) / (1000 * 60 * 60 * 24) > 3 : false;
-
+    const [curriculum, setCurriculum] = useState('CAPS');
 
     const handleSendAI = async () => {
         // 1. figure out what student wants
@@ -351,7 +351,16 @@ Rules:
         return (
             <ScrollView style={{ flex: 1, backgroundColor: '#F7F8FC' }} contentContainerStyle={{ padding: 22, paddingTop: 60 }}>
                 <Text style={{ fontSize: 22, fontWeight: '800', color: '#12183A', marginBottom: 6 }}>What grade are you in? 📚</Text>
-                <Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 24 }}>We will load your CAPS subjects automatically.</Text>
+                <Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 12 }}>We will load your subjects automatically</Text>
+
+                <Text style={{ fontSize: 13, fontWeight: '800', color: '#12183A', marginBottom: 8 }}>Curriculum</Text>
+                <View style={{ flexDirection: 'row', gap: 12, marginBottom: 24 }}>
+                    {['CAPS', 'IEB'].map(c => (
+                        <TouchableOpacity key={c} onPress={() => setCurriculum(c)} style={{ paddingVertical: 10, paddingHorizontal: 20, borderRadius: 10, backgroundColor: curriculum === c ? '#16C79A' : '#E8EAF0' }}>
+                            <Text style={{ fontWeight: '700', color: curriculum === c ? '#fff' : '#12183A' }}>{c}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
                 {phases.map(({ phase, grades }) => (
                     <View key={phase} style={{ marginBottom: 20 }}>
                         <Text style={{ fontSize: 10, fontWeight: '800', color: '#9BA3BE', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 10 }}>{phase}</Text>
@@ -606,14 +615,14 @@ Rules:
             setMessage('');
 
             setChat((prev) => [...prev, { role: 'user', text: userMsg }]);
-// Detect and remember subject
-const subjects = ['geography', 'maths', 'science', 'history', 'english', 'physics', 'biology', 'accounting'];
-const found = subjects.find(s => userMsg.toLowerCase().includes(s));
-if (found && found !== sessionSubject) {
-setSessionSubject(found);
-const ref = doc(db, 'users', name); // you already have db from line 17
-await setDoc(ref, { lastSubject: found }, { merge: true });
-}
+            // Detect and remember subject
+            const subjects = ['geography', 'maths', 'science', 'history', 'english', 'physics', 'biology', 'accounting'];
+            const found = subjects.find(s => userMsg.toLowerCase().includes(s));
+            if (found && found !== sessionSubject) {
+                setSessionSubject(found);
+                const ref = doc(db, 'users', name); // you already have db from line 17
+                await setDoc(ref, { lastSubject: found }, { merge: true });
+            }
 
             setLoading(true);
 
@@ -643,7 +652,8 @@ If mode is set, respond accordingly like a South African teacher.
                         msg: userMsg,
                         grade,
                         subject: sessionSubject,
-history: chat.slice(-10)
+                        history: chat.slice(-10),
+                        curriculum
                     })
                 });
 
