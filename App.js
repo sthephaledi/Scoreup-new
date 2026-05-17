@@ -1099,7 +1099,7 @@ If mode is set, respond accordingly like a South African teacher.
                     <View style={{ backgroundColor: '#fff', borderRadius: 20, padding: 24, borderWidth: 2, borderColor: '#3A86FF', marginBottom: 20 }}>
                         <Text style={{ fontSize: 13, fontWeight: '800', color: '#3A86FF', marginBottom: 8 }}>SCOREUP PRO</Text>
                         <Text style={{ fontSize: 42, fontWeight: '800', color: '#12183A' }}>R200<Text style={{ fontSize: 16, color: '#5A6282' }}>/month</Text></Text>
-                        <Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 20 }}><Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 8 }}>Normal price: R200/month</Text>
+                        <Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 20 }}><Text style={{ fontSize: 13, color: '#5A6282', marginBottom: 8 }}>Normal price: R97/month</Text>
                             <View style={{ backgroundColor: '#16C79A18', borderRadius: 10, padding: 12, marginBottom: 20, borderWidth: 1, borderColor: '#16C79A30' }}>
                                 <Text style={{ fontSize: 12, fontWeight: '800', color: '#16C79A', marginBottom: 4 }}>🎟️ With Influencer Promo Code:</Text>
                                 <Text style={{ fontSize: 13, color: '#12183A', fontWeight: '700' }}>• Month 1: R160 (R40 off)</Text>
@@ -1116,7 +1116,7 @@ If mode is set, respond accordingly like a South African teacher.
 
                         <TouchableOpacity onPress={() => { const validCodes = ['THABO20', 'AMARA20', 'LEBO20']; if (promoCode && validCodes.includes(promoCode.toUpperCase())) { alert('Promo code applied! First month R160 then R185/month'); } else if (promoCode) { alert('Invalid promo code'); } else { alert('Proceeding with R200/month'); } }} style={{ backgroundColor: '#3A86FF', borderRadius: 14, padding: 16, alignItems: 'center' }}>
 
-                            <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Subscribe Now — R200/month</Text>
+                            <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Subscribe Now — R97/month</Text>
                         </TouchableOpacity>
                     </View>
                     <Text style={{ fontSize: 12, color: '#9BA3BE', textAlign: 'center' }}>Cancel anytime. No hidden fees. Secure payment via PayFast.</Text>
