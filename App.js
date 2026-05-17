@@ -1331,7 +1331,7 @@ If mode is set, respond accordingly like a South African teacher.
                 <Text style={{ fontSize: 24, fontWeight: '800', color: '#12183A', marginBottom: 8, textAlign: 'center' }}>Premium Feature</Text>
                 <Text style={{ fontSize: 15, color: '#5A6282', textAlign: 'center', lineHeight: 24, marginBottom: 32 }}>Subscribe to ScoreUp to unlock the AI Tutor, Study Planner, Quizzes, Past Papers and more!</Text>
                 <TouchableOpacity onPress={() => Linking.openURL('https://score-up-genius.lovable.app')} style={{ backgroundColor: '#3A86FF', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
-                    <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Subscribe — R200/month →</Text>
+                    <Text style={{ fontSize: 15, fontWeight: '800', color: '#fff' }}>Subscribe — R97/month →</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setScreen('activate')} style={{ backgroundColor: '#FFF4E8', borderRadius: 14, padding: 16, alignItems: 'center', width: '100%', marginBottom: 12 }}>
