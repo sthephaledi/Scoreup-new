@@ -590,7 +590,7 @@ Rules:
                     </TouchableOpacity>
                 )}
                 <TouchableOpacity onPress={() => Linking.openURL('https://score-up-genius.lovable.app')} style={{ backgroundColor: '#3A86FF18', borderRadius: 14, padding: 14, marginTop: 8 }}>
-                    <Text style={{ fontSize: 12, fontWeight: '800', color: '#3A86FF', marginBottom: 3 }}>⭐ Subscribe — R200/month</Text>
+                    <Text style={{ fontSize: 12, fontWeight: '800', color: '#3A86FF', marginBottom: 3 }}>⭐ Subscribe — R97/month</Text>
                     <Text style={{ fontSize: 12, color: '#5A6282' }}>First month R160 with promo code </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={async () => { localStorage.clear(); document.cookie = "userToken=;max-age=0;path=/"; setName(''); setGrade(''); setSelected([]); setMarks({}); setEmail(''); setPassword(''); setToken(''); setUid(''); setScreen('splash'); }} style={{ backgroundColor: '#FFF0F0', borderRadius: 14, padding: 14, marginTop: 8, alignItems: 'center' }}>
