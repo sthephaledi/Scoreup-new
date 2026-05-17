@@ -1,4 +1,5 @@
 import * as Notifications from 'expo-notifications';
+import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
@@ -15,6 +16,8 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
+const analytics = getAnalytics(firebaseApp);
+
 
 
 /**
